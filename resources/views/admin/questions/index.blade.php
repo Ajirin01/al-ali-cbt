@@ -93,7 +93,7 @@
                             <div class="overlay-wrapper">
                                 {{-- add question component --}}
                                 <div style="display: none; text-align: center" class="overlay dark" id="ajax-loader2"><i style="position: fixed; margin-top: 20vh" class="fas fa-3x fa-sync-alt fa-spin"></i></div>
-                                <x-question.question-import />
+                                <x-question.question-import :options="$options" />
                             </div>
                             {{-- /. Add Question --}}
                         </div>
