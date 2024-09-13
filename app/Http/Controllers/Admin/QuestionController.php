@@ -34,7 +34,15 @@ class QuestionController extends Controller
         //             ]
         //         ]);
 
-        return view('admin.questions.index', ['questions'=> $questions,
+        // return response()->json(['questions'=> $questions,
+        //             'options'=> ['exam_id'=> $request->exam_id, 
+        //             'exam_paper_id'=> $request->exam_paper_id,
+        //             'classes_id'=> $exam_paper->classes_id,
+        //             'subject_id'=> $exam_paper->subject_id
+        //             ]
+        //         ]);
+
+        return view('portal.questions.index', ['questions'=> $questions,
                     'options'=> ['exam_id'=> $request->exam_id, 
                     'exam_paper_id'=> $request->exam_paper_id,
                     'classes_id'=> $exam_paper->classes_id,
@@ -67,11 +75,11 @@ class QuestionController extends Controller
 
             // return response()->json($classes);
 
-            return view('admin.questions.options', ['exams'=> $exams, 'classes'=> $classes, 'subjects'=> $subjects]);
+            return view('portal.questions.options', ['exams'=> $exams, 'classes'=> $classes, 'subjects'=> $subjects]);
         }else{
             $classes = Classes::All();
             $subjects = Subject::All();
-            return view('admin.questions.options', ['exams'=> $exams, 'classes'=> $classes, 'subjects'=> $subjects]);
+            return view('portal.questions.options', ['exams'=> $exams, 'classes'=> $classes, 'subjects'=> $subjects]);
 
         }
 

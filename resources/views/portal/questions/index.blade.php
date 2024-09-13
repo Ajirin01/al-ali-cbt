@@ -1,6 +1,6 @@
 @extends('layouts.admin_layout')
 
-@section('admin-content')
+@section('portal-content')
     @push('typemath-scripts')
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
