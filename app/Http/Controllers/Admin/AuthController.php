@@ -12,22 +12,22 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     public function loginForm(){
-        return view('portal.auth.login');
+        return view('admin.auth.login');
     }
 
     public function loginSubmit(Request $request){
         if(Auth::attempt($request->except('_token'))){
             // return response()->json("login success");
-            return redirect('portal/dashboard');
+            return redirect('admin/dashboard');
         }else{
             // return response()->json("login error");
-            return redirect('portal/login')->with('message', 'Error! Incorrect credentials');
+            return redirect('admin/login')->with('message', 'Error! Incorrect credentials');
         }
     }
 
     public function logout(Request $request){
         Auth::logout();
 
-        return redirect('portal/login');
+        return redirect('admin/login');
     }
 }

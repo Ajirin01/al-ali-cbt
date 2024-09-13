@@ -26,23 +26,7 @@ class QuestionController extends Controller
         }
         $questions = Question::where($request->except('_token', 'year_id'))->get();
 
-        // return response()->json(['questions'=> $questions,
-        //             'options'=> ['exam_id'=> $request->exam_id, 
-        //             'exam_paper_id'=> $request->exam_paper_id,
-        //             'classes_id'=> $exam_paper->classes_id,
-        //             'subject_id'=> $exam_paper->subject_id
-        //             ]
-        //         ]);
-
-        // return response()->json(['questions'=> $questions,
-        //             'options'=> ['exam_id'=> $request->exam_id, 
-        //             'exam_paper_id'=> $request->exam_paper_id,
-        //             'classes_id'=> $exam_paper->classes_id,
-        //             'subject_id'=> $exam_paper->subject_id
-        //             ]
-        //         ]);
-
-        return view('portal.questions.index', ['questions'=> $questions,
+        return view('admin.questions.index', ['questions'=> $questions,
                     'options'=> ['exam_id'=> $request->exam_id, 
                     'exam_paper_id'=> $request->exam_paper_id,
                     'classes_id'=> $exam_paper->classes_id,
@@ -54,35 +38,6 @@ class QuestionController extends Controller
     public function selectOptions(){
         $exams = Exam::all();
 
-        if(Auth::user()->role == "teacher"){
-            $classes_ids = [];
-            $subjects_ids = [];
-
-            $teacher_classes = Auth::user()->teacher->teacher_classes;
-            $teacher_subjects = Auth::user()->teacher->teacher_subjects;
-            // return response()->json($teacher_classes);
-
-            foreach ($teacher_classes as $key => $teacher_class) {
-                array_push($classes_ids, $teacher_class->classes_id);
-            }
-
-            foreach ($teacher_subjects as $key => $teacher_subject) {
-                array_push($subjects_ids, $teacher_subject->subject_id);
-            }
-            
-            $classes = Classes::whereIn('id', $classes_ids)->get();
-            $subjects = Subject::whereIn('id', $subjects_ids)->get();
-
-            // return response()->json($classes);
-
-            return view('portal.questions.options', ['exams'=> $exams, 'classes'=> $classes, 'subjects'=> $subjects]);
-        }else{
-            $classes = Classes::All();
-            $subjects = Subject::All();
-            return view('portal.questions.options', ['exams'=> $exams, 'classes'=> $classes, 'subjects'=> $subjects]);
-
-        }
-
-        
+        return view('admin.questions.options', ['exams'=> $exams]);
     }
 }

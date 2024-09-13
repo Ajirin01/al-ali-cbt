@@ -84,7 +84,7 @@
               <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-              <a href="{{ URL::to('portal/dashboard') }}" class="nav-link">Home</a>
+              <a href="{{ URL::to('admin/dashboard') }}" class="nav-link">Home</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
@@ -94,13 +94,9 @@
                 <a class="dropdown-item" href="#">
                   <span data-toggle="modal" data-target="#modal-xl-profile-view"><i class="fa fa-eye" ></i> View</span>
                 </a>
-
-                @if (Auth::user()->role == "admin" || Auth::user()->role == "teacher")
-                  <a class="dropdown-item" href="#">
-                    <span data-toggle="modal" data-target="#modal-xl-profile-edit"><i class="fa fa-edit" ></i> Edit</span>
-                  </a>
-                @endif
-                
+                <a class="dropdown-item" href="#">
+                  <span data-toggle="modal" data-target="#modal-xl-profile-edit"><i class="fa fa-edit" ></i> Edit</span>
+                </a>
               </div>
             </li>
           </ul>
@@ -112,7 +108,7 @@
           <!-- Brand Logo -->
           <a href="#" class="brand-link">
             <img src="{{ asset('images/logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-            <span class="brand-text font-weight-light" style="font-size: .7rem">Al-Ali Internal School</span>
+            <span class="brand-text font-weight-light">Al-Ali Internal School</span>
           </a>
       
           <!-- Sidebar -->
@@ -123,7 +119,7 @@
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
                 <li class="nav-item menu-open">
-                  <a href="{{ URL::to('portal/dashboard') }}" class="nav-link active">
+                  <a href="{{ URL::to('admin/dashboard') }}" class="nav-link active">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>
                       Dashboard
@@ -132,7 +128,7 @@
                   </a>
                 </li>
 
-                {{-- @if (Auth::user()->role == "admin" || Auth::user()->role == "teacher")
+                @if (Auth::user()->role == "admin" || Auth::user()->role == "teacher")
                   <li class="nav-item">
                     <a href="{{ route('manage-questions-options') }}" class="nav-link">
                       <i class="nav-icon fa fa-question-circle"></i>
@@ -141,26 +137,26 @@
                       </p>
                     </a>
                   </li>
-                @endif --}}
+                @endif
                 
                 @if (Auth::user()->role == "admin")
-                  {{-- <li class="nav-item">
+                  <li class="nav-item">
                     <a href="{{ route('manage-years') }}" class="nav-link">
                       <i class="nav-icon far fa-calendar-alt"></i>
                       <p>
                         Years
                       </p>
                     </a>
-                  </li> --}}
+                  </li>
 
-                  {{-- <li class="nav-item">
+                  <li class="nav-item">
                     <a href="{{ route('manage-terms') }}" class="nav-link">
                       <i class="nav-icon fa fa-calendar"></i>
                       <p>
                         Terms
                       </p>
                     </a>
-                  </li> --}}
+                  </li>
 
                   <li class="nav-item">
                     <a href="{{ route('manage-classes') }}" class="nav-link">
@@ -180,23 +176,23 @@
                     </a>
                   </li>
 
-                  {{-- <li class="nav-item">
+                  <li class="nav-item">
                     <a href="{{ route('manage-exams-options') }}" class="nav-link">
                       <i class="nav-icon fa fa-hourglass-half"></i>
                       <p>
                         Exams
                       </p>
                     </a>
-                  </li> --}}
+                  </li>
 
-                  {{-- <li class="nav-item">
+                  <li class="nav-item">
                     <a href="{{ route('manage-exam-papers-options') }}" class="nav-link">
                       <i class="nav-icon fa fa-newspaper"></i>
                       <p>
                         Exam Papers
                       </p>
                     </a>
-                  </li> --}}
+                  </li>
 
                   <li class="nav-item">
                     <a href="{{ route('manage-teachers') }}" class="nav-link">
@@ -207,27 +203,16 @@
                     </a>
                   </li>
                 @endif
-
-                @if (!(Auth::user()->role == "admin" || Auth::user()->role == "teacher"))
-                  <li class="nav-item">
-                    <a href="{{ url('http://alalischools.com/eresult') }}" class="nav-link">
-                      <i class="nav-icon fa fa-book"></i>
-                      <p>
-                        Report Sheet
-                      </p>
-                    </a>
-                  </li>
-                @endif
               
                 @if (Auth::user()->role == "admin" || Auth::user()->role == "teacher")
-                  {{-- <li class="nav-item">
+                  <li class="nav-item">
                     <a href="{{ route('manage-results-options') }}" class="nav-link">
                       <i class="nav-icon fa fa-book"></i>
                       <p>
                         Results
                       </p>
                     </a>
-                  </li> --}}
+                  </li>
 
                   <li class="nav-item">
                     <a href="{{ route('manage-students-options') }}" class="nav-link">
@@ -240,7 +225,7 @@
                 @endif
 
                 <li class="nav-item" style="color: red">
-                  <a href="{{ route('portal-logout') }}" class="nav-link">
+                  <a href="{{ route('admin-logout') }}" class="nav-link">
                     <i class="nav-icon fa fa-logout"></i>
                     <p style="color: red">
                       Logout
@@ -265,7 +250,7 @@
                 <x-general.profile-view-edit />
 
                 <!-- Main content -->
-                @yield('portal-content')
+                @yield('admin-content')
                 <!-- /.content -->
               </div>
               <!-- /.container-fluid -->
@@ -547,7 +532,7 @@
           then(res => {
               document.getElementById("closedelete" + id + noun).click() 
               document.getElementById(noun + id + area).style.display = "none"
-              console.log(res.data)
+              // console.log(res.message)
               successAlert("<h5>"+ res.message +"</h5>")
               document.getElementById('ajax-loader').style.display = 'none'
               $('.modal').css('opacity', 1)
